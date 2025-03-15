@@ -9,23 +9,22 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 console.log({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
 });
 
 
 const db =  mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306,
+  host: 'tramway.proxy.rlwy.net',
+  user: 'root',
+  password: 'rFhuMtKOMnAdfrvkbnZnpxTtouQNdfOO',
+  database: 'railway',
+  port: 44827,
 });
 
 
@@ -63,4 +62,4 @@ app.delete('/task/:id', (req, res) => {
   });
 });
 
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(3000, () => console.log(`🚀 Server running on port ${PORT}`));
