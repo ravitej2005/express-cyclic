@@ -20,8 +20,11 @@ const db = mysql.createConnection({
 
 
 db.connect((err) => {
-  if (err) throw err;
-  console.log("✅ Database Connected");
+  if (err) {
+    console.error("❌ Database connection failed:", err);
+    throw err;
+  }
+  console.log("✅ Database Connected to", process.env.DB_HOST);
 });
 
 app.get('/tasks', (req, res) => {
