@@ -11,14 +11,6 @@ app.use(cors());
 
 const PORT = 3000;
 
-console.log({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-
 const db =  mysql.createConnection({
   host: 'tramway.proxy.rlwy.net',
   user: 'root',
@@ -33,7 +25,7 @@ db.connect((err) => {
     console.error("❌ Database connection failed:", err);
     throw err;
   }
-  console.log("✅ Database Connected to", process.env.DB_HOST);
+  console.log("✅ Database Connected");
 });
 
 app.get('/tasks', (req, res) => {
@@ -45,6 +37,7 @@ app.get('/tasks', (req, res) => {
 });
 
 app.post('/addtasks', (req, res) => {
+  console.log("In addtasks api");
   const { task } = req.body;
   const query = "INSERT INTO tasks (task) VALUES(?);";
   db.query(query, [task], (err, result) => {
